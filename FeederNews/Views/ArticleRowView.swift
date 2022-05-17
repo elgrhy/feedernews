@@ -67,7 +67,7 @@ struct ArticleRowView: View {
                     .buttonStyle(.bordered)
                     
                     Button {
-                        
+                        presentShareSheet(url: article.articleURL)
                     } label: {
                         Image(systemName: "arrowshape.turn.up.right")
                     }
@@ -88,8 +88,6 @@ extension View {
             .keyWindow?
             .rootViewController?
             .present(activityVC, animated: true)
-        
-        
     }
 }
 
