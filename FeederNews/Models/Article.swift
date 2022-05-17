@@ -32,7 +32,7 @@ struct Article {
         "\(source.name) . \(relativeDateFormatter.localizedString(for: publishedAt, relativeTo: Date()))"
     }
     
-    var articleurl: URL {
+    var articleURL: URL {
         URL(string: url)!
     }
     

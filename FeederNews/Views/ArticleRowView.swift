@@ -17,7 +17,11 @@ struct ArticleRowView: View {
             AsyncImage(url: article.imageURL) { phase in
                 switch phase {
                 case .empty:
-                    ProgressView()
+                    HStack{
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
                     
                 case .success(let image):
                     image
@@ -25,7 +29,12 @@ struct ArticleRowView: View {
                         .aspectRatio(contentMode: .fill)
                     
                 case .failure:
-                    Image(systemName: "photo")
+                    HStack {
+                        Spacer()
+                        Image(systemName: "photo")
+                        Spacer()
+                    }
+                    
                 @unknown default:
                     fatalError()
                 }
@@ -43,10 +52,44 @@ struct ArticleRowView: View {
                     .font(.subheadline)
                     .lineLimit(2)
                 
-                
+                HStack {
+                    Text(article.captionText)
+                        .lineLimit(1)
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                    Spacer()
+                    
+                    Button {
+
+                    } label: {
+                        Image(systemName: "heart")
+                    }
+                    .buttonStyle(.bordered)
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "arrowshape.turn.up.right")
+                    }
+                    .buttonStyle(.bordered)
+
+                }
             }
             .padding([.horizontal, .bottom])
         }
+    }
+}
+
+extension View {
+    
+    func presentShareSheet(url: URL) {
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+            .keyWindow?
+            .rootViewController?
+            .present(activityVC, animated: true)
+        
+        
     }
 }
 
